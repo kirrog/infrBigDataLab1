@@ -1,0 +1,10 @@
+stages:
+  preprocess:
+    cmd: python -m src.preprocess
+    deps:
+    - data/seeds.csv
+    - src/preprocess.py
+    outs:
+    - data/test_data.csv
+    - data/train_data.csv
+    - data/validation_data.csv

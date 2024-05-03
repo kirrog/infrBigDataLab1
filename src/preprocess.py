@@ -28,6 +28,6 @@ class Preprocessor:
         save_valid_data(self.validation_data)
 
 
-if __name__ == "__main":
+if __name__ == "__main__":
     preprocessor = Preprocessor()
-    preprocessor.prepare_data("../data/seeds.csv")
+    preprocessor.prepare_data("./data/seeds.csv")

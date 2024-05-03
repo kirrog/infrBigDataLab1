@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 
-path2models = Path("../experiments")
+path2models = Path("./experiments")
 
 
 def load_model(path: str = "svc"):
@@ -18,17 +18,17 @@ def load_data(path: str):
 
 
 def load_train_data():
-    train_data = load_data("../data/train_data.csv")
+    train_data = load_data("./data/train_data.csv")
     return train_data
 
 
 def load_test_data():
-    test_data = load_data("../data/test_data.csv")
+    test_data = load_data("./data/test_data.csv")
     return test_data
 
 
 def load_valid_data():
-    validation_data = load_data("../data/validation_data.csv")
+    validation_data = load_data("./data/validation_data.csv")
     return validation_data
 
 
@@ -37,15 +37,15 @@ def save_data(data, path: str):
 
 
 def save_train_data(train_data):
-    save_data(train_data, "../data/train_data.csv")
+    save_data(train_data, "./data/train_data.csv")
 
 
 def save_test_data(test_data):
-    save_data(test_data, "../data/test_data.csv")
+    save_data(test_data, "./data/test_data.csv")
 
 
 def save_valid_data(validation_data):
-    save_data(validation_data, "../data/validation_data.csv")
+    save_data(validation_data, "./data/validation_data.csv")
 
 
 def split2x_y(data):
