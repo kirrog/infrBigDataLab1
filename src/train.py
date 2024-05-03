@@ -9,33 +9,41 @@ from sklearn.svm import LinearSVC
 from src.utils import load_train_data, load_test_data, split2x_y
 
 
-def train_model():
-    clf = make_pipeline(StandardScaler(), LinearSVC(dual="auto", random_state=0, tol=1e-5))
+class Trainer:
+    def __init__(self, dual: str = "auto", random_state: int = 0, tol: float = 1e-5):
+        self.model = self.create_new_model(dual, random_state, tol)
 
-    x_train, y_train = split2x_y(load_train_data())
-    x_test, y_test = split2x_y(load_test_data())
+    def create_new_model(self, dual: str, random_state: int, tol: float):
+        return make_pipeline(StandardScaler(), LinearSVC(dual=dual, random_state=random_state, tol=tol))
 
-    clf.fit(x_train, y_train)
-    scores = dict()
+    def train_model(self, reinit: bool = True):
+        if reinit:
+            self.model = self.create_new_model()
+        x_train, y_train = split2x_y(load_train_data())
+        x_test, y_test = split2x_y(load_test_data())
 
-    score = clf.score(x_train, y_train)
-    print(f"Result score of trained model on train data: {score}")
-    scores["train_acc"] = score
+        self.model.fit(x_train, y_train)
+        scores = dict()
 
-    score = clf.score(x_test, y_test)
-    print(f"Result score of trained model on test data: {score}")
-    scores["test_acc"] = score
+        score = self.model.score(x_train, y_train)
+        print(f"Result score of trained model on train data: {score}")
+        scores["train_acc"] = score
 
-    p = Path("../experiments/svc")
+        score = self.model.score(x_test, y_test)
+        print(f"Result score of trained model on test data: {score}")
+        scores["test_acc"] = score
 
-    p.mkdir(exist_ok=True, parents=True)
+        p = Path("../experiments/svc")
 
-    with open(str(p / "model.pkl"), "wb") as f:
-        pickle.dump(clf, f)
+        p.mkdir(exist_ok=True, parents=True)
 
-    with open(str(p / "metrics.json"), "w", encoding="UTF-8") as f:
-        json.dump(scores, f)
+        with open(str(p / "model.pkl"), "wb") as f:
+            pickle.dump(self.model, f)
+
+        with open(str(p / "metrics.json"), "w", encoding="UTF-8") as f:
+            json.dump(scores, f)
 
 
 if __name__ == "__main__":
-    train_model()
+    trainer = Trainer()
+    trainer.train_model()
