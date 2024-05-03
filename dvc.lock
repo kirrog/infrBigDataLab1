@@ -1,17 +1,8 @@
 schema: '2.0'
 stages:
   preprocess:
-    cmd: python -m src.preprocess
+    cmd: python -m src.train
     deps:
-    - path: data/seeds.csv
-      hash: md5
-      md5: 2ae59e5b2c3242791d5aa2d8ba515831
-      size: 9125
-    - path: src/preprocess.py
-      hash: md5
-      md5: fcaa01505655ed7a2d24034273b80a49
-      size: 1215
-    outs:
     - path: data/test_data.csv
       hash: md5
       md5: 8b4df430356a517306f25b788c7e7db3
@@ -20,7 +11,16 @@ stages:
       hash: md5
       md5: c84e8e41450284b302cd473be6cb2fcc
       size: 7732
-    - path: data/validation_data.csv
+    - path: src/train.py
       hash: md5
-      md5: 8b4df430356a517306f25b788c7e7db3
-      size: 1032
+      md5: a6309ddfd34b7ba9e364d14c3f059ad2
+      size: 1690
+    outs:
+    - path: experiments/svc/metrics.json
+      hash: md5
+      md5: f25c7495ce5c291ce0857db3714623e8
+      size: 38
+    - path: experiments/svc/model.pkl
+      hash: md5
+      md5: 41710775ab6caeb4ed468315c1f4ad6e
+      size: 1322

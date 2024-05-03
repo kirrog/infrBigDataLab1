@@ -1,10 +1,11 @@
 stages:
   preprocess:
-    cmd: python -m src.preprocess
+    cmd: python -m src.train
     deps:
-    - data/seeds.csv
-    - src/preprocess.py
-    outs:
     - data/test_data.csv
     - data/train_data.csv
-    - data/validation_data.csv
+    - src/train.py
+    outs:
+    - experiments/svc/model.pkl
+    metrics:
+    - experiments/svc/metrics.json

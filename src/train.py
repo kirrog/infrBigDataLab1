@@ -11,6 +11,9 @@ from src.utils import load_train_data, load_test_data, split2x_y
 
 class Trainer:
     def __init__(self, dual: str = "auto", random_state: int = 0, tol: float = 1e-5):
+        self.dual = dual
+        self.random_state = random_state
+        self.tol = tol
         self.model = self.create_new_model(dual, random_state, tol)
 
     def create_new_model(self, dual: str, random_state: int, tol: float):
@@ -18,7 +21,7 @@ class Trainer:
 
     def train_model(self, reinit: bool = True):
         if reinit:
-            self.model = self.create_new_model()
+            self.model = self.create_new_model(self.dual, self.random_state, self.tol)
         x_train, y_train = split2x_y(load_train_data())
         x_test, y_test = split2x_y(load_test_data())
 
@@ -33,7 +36,7 @@ class Trainer:
         print(f"Result score of trained model on test data: {score}")
         scores["test_acc"] = score
 
-        p = Path("../experiments/svc")
+        p = Path("./experiments/svc")
 
         p.mkdir(exist_ok=True, parents=True)
 
