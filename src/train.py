@@ -48,5 +48,11 @@ class Trainer:
 
 
 if __name__ == "__main__":
-    trainer = Trainer()
+    trainer = None
+    try:
+        with open("./config.ini", "r") as f:
+            args = json.load(f)
+        trainer = Trainer(args["dual"], args["random_state"], args["tol"])
+    except:
+        trainer = Trainer()
     trainer.train_model()
