@@ -1,6 +1,7 @@
 import unittest
 
 import pandas
+import requests
 from sklearn.pipeline import Pipeline
 
 from src.predict import Predictor
@@ -50,3 +51,10 @@ class UtilsTest(unittest.TestCase):
         x, y = split2x_y(dataframe)
         self.assertEqual(x, dataframe_x)
         self.assertEqual(y, [1.0, 2.0])
+
+
+class ApiTest(unittest.TestCase):
+    def test_api_health(self):
+        r = requests.get('http://localhost:5000/')
+        result = r.text
+        self.assertEqual(result, "Flask is running!")
