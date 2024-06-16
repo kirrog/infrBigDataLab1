@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage('ci') {
             steps {
+                sh 'apt install python'
                 sh 'git checkout dev'
                 sh 'git pull'
 //                 sh 'docker build . -t kirrog76/infr_big_data'
