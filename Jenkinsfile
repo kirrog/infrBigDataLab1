@@ -2,9 +2,8 @@ pipeline {
 //     agent any
     agent {
         docker {
-        label 'docker'
-        image 'python:3.9'
-    }
+            image 'python:3.9'
+        }
     }
     stages {
         stage('ci') {
@@ -22,7 +21,7 @@ pipeline {
                     sh "virtualenv venv"
                     sh "pip install -r requirements.txt "
 
-         }
+                }
             }
         }
         stage('cd') {
