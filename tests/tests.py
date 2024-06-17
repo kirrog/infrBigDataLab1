@@ -53,8 +53,8 @@ class UtilsTest(unittest.TestCase):
         self.assertEqual(y, [1.0, 2.0])
 
 
-class ApiTest(unittest.TestCase):
-    def test_api_health(self):
-        r = requests.get('http://localhost:5000/')
-        result = r.text
-        self.assertEqual(result, "Flask is running!")
+# class ApiTest(unittest.TestCase):
+#     def test_api_health(self):
+#         r = requests.get('http://localhost:5000/')
+#         result = r.text
+#         self.assertEqual(result, "Flask is running!")

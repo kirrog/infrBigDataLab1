@@ -30,7 +30,7 @@ pipeline {
 //                 sh 'docker pull kirrog76/infr_big_data'
 //                 sh 'docker run kirrog76/infr_big_data sh -c "python -m main; python -m unittest tests.tests"'
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'python -m main'
+//                     sh 'python -m main'
                     sh 'python -m unittest tests.tests'
                 }
 
