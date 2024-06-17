@@ -38,6 +38,11 @@ pipeline {
         }
         stage('test') {
             steps {
+                withCredentials([usernamePassword(credentialsId: 'docker_hub', passwordVariable: 'docker_hub_pw', usernameVariable: 'docker_hub_us')]) {
+                    sh "docker login -u ${env.docker_hub_us} -p ${env.docker_hub_pw}"
+                    sh 'docker pull kirrog76/infr_big_data'
+                }
+                sh 'docker run kirrog76/infr_big_data sh -c "python -m unittest tests.tests"'
 //                 sh 'docker login -u $docker_hub_us -p $docker_hub_pw'
 //                 sh 'docker pull kirrog76/infr_big_data'
 //                 sh 'docker run kirrog76/infr_big_data sh -c "python -m main; python -m unittest tests.tests"'
@@ -45,7 +50,6 @@ pipeline {
 // //                     sh 'python -m main'
 //                     sh 'python -m unittest tests.tests'
 //                 }
-                echo 'TEST!'
             }
         }
     }
