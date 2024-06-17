@@ -18,7 +18,7 @@ pipeline {
 //                 sh 'python -m pip install --no-cache-dir -r requirements.txt'
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh "pip install virtualenv"
-                    sh "virtualenv venv"
+                    sh "python -m virtualenv venv"
                     sh "pip install -r requirements.txt "
 
                 }
