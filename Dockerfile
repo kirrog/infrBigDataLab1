@@ -11,6 +11,7 @@ COPY ./data/seeds.csv ./data/
 COPY ./experiments/svc/model.pkl ./experiments/svc/model.pkl
 COPY ./src ./src
 COPY ./tests ./tests
+COPY ./main.py ./main.py
 
 #RUN pwd
 #RUN ls -alh
